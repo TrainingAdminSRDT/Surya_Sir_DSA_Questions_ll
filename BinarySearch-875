@@ -1,0 +1,38 @@
+class Solution {
+    boolean canbeallocated(int[] piles, int h, int mid) {
+        long time = 0;
+        for (int i = 0; i < piles.length; i++) {
+            if (piles[i] % mid == 0) {
+                time = time + (piles[i] / mid) + 0;
+            } else {
+                time = time +( piles[i]/mid) + 1;
+            }
+        }
+        if (time > h) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public int minEatingSpeed(int[] piles, int h) {
+        int low = 1;
+        int high = Integer.MIN_VALUE;
+        int eatingspeed = -1;
+        for (int i = 0; i < piles.length; i++) {
+            high = Math.max(high, piles[i]);
+        }
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (canbeallocated(piles, h, mid)) {
+                eatingspeed = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return eatingspeed;
+
+    }
+}
