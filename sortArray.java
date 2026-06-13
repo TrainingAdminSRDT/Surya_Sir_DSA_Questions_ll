@@ -1,52 +1,51 @@
-import java.util.Arrays;
-
 public class sortArray {
-    public int[] sortArrayFunc(int[] nums) {
-        mergeSort(nums, 0, nums.length - 1);
+  
+    public int[] sortArray(int[] nums) {
+        //merge sort
+        int p = 0;
+        int r = nums.length - 1;
+        return mergeSort(nums, p, r);
+    }
+
+    public int[] mergeSort(int[] nums, int p, int r) {
+        if (p < r) {
+            int q = (p + r) / 2;
+            mergeSort(nums, p, q);
+            mergeSort(nums, q + 1, r);
+            merge(nums, p, q, r);
+
+        }
         return nums;
     }
 
-    private void mergeSort(int[] nums, int left, int right) {
-        if (left >= right) {
-            return;
+    public int[] merge(int[] a, int p, int q, int r) {
+        int[] left = new int[q - p + 1];
+        int[] right = new int[r - q];
+        int i = 0, j = 0, k = 0;
+        for (i = 0; i < q - p + 1; i++) {
+            left[i] = a[p + i];
         }
-        int mid = left + (right - left) / 2;
-        mergeSort(nums, left, mid);
-        mergeSort(nums, mid + 1, right);
-        merge(nums, left, mid, right);
-    }
-
-    private void merge(int[] nums, int left, int mid, int right) {
-        int[] temp = new int[right - left + 1];
-        int i = left, j = mid + 1, k = 0;
-
-        while (i <= mid && j <= right) {
-            if (nums[i] <= nums[j]) {
-                temp[k++] = nums[i++];
+        for (i = 0; i < r - q; i++) {
+            right[i] = a[q + i + 1];
+        }
+        i = 0;
+        j = 0;
+        k = p;
+        while (i < q - p + 1 && j < r - q) {
+            if (left[i] <= right[j]) {
+                a[k++] = left[i++];
             } else {
-                temp[k++] = nums[j++];
+                a[k++] = right[j++];
             }
         }
-
-        while (i <= mid) {
-            temp[k++] = nums[i++];
+        while (i < q - p + 1) {
+            a[k++] = left[i++];
         }
-
-        while (j <= right) {
-            temp[k++] = nums[j++];
+        while (j < r - q) {
+            a[k++] = right[j++];
         }
+        return a;
 
-        for (int p = 0; p < temp.length; p++) {
-            nums[left + p] = temp[p];
-        }
     }
 
-    public static void main(String[] args) {
-        sortArray sa = new sortArray();
-        int[] nums = {5, 2, 3, 1};
-        System.out.println("Original Array: " + Arrays.toString(nums));
-        
-        int[] sorted = sa.sortArrayFunc(nums);
-        System.out.println("Sorted Array: " + Arrays.toString(sorted));
-    }
 }
