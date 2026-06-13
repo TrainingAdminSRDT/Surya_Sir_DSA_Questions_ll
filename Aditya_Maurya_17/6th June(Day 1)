@@ -1,0 +1,48 @@
+// DAY 1
+//program 1
+class Solution {
+public:
+    int addDigits(int num) {
+        int m = num;
+        long sum = sumCalculation(m);
+
+        while(sum > 9) {
+           sum= sumCalculation(sum);
+        }
+        return (int)sum;
+    }
+    long sumCalculation(int n) {
+        long sum = 0;
+        int m = n;
+        while (m > 0) {
+
+            sum += m % 10;
+            m = m / 10;
+        }
+        return sum;
+    }
+};
+
+// program 2 
+class Solution {
+public:
+    int reverse(int x) {
+        int rev = 0;
+
+        while (x != 0) {
+            int digit = x % 10;
+            x /= 10;
+
+            // Check for overflow before updating rev
+            if (rev > INT_MAX / 10 || (rev == INT_MAX / 10 && digit > 7))
+                return 0;
+
+            if (rev < INT_MIN / 10 || (rev == INT_MIN / 10 && digit < -8))
+                return 0;
+
+            rev = rev * 10 + digit;
+        }
+
+        return rev;
+    }
+};
