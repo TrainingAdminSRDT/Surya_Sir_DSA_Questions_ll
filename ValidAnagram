@@ -1,0 +1,48 @@
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        // int sum1=0;
+        // int sum2=0;
+        // for(int i=0;i<s.length();i++){
+        //     char current=s.charAt(i);
+        //     sum1=sum1+(int) current;
+
+        // }
+        // for(int i=0;i<t.length();i++){
+        //     char current=t.charAt(i);
+        //     sum2=sum2+(int) current;
+
+        // }
+        // if(sum1==sum2){
+        //     return true;
+        // }
+        // else{
+        //     return false;
+        // }
+
+
+       
+
+       if(s.length()!=t.length()){
+        return false;
+       }
+
+
+       char[] first=new char[s.length()];
+       char[] second=new char[t.length()];
+       for(int i=0;i<s.length();i++){
+        first[i]=s.charAt(i);
+        second[i]=t.charAt(i);
+       }
+       Arrays.sort(first);
+       Arrays.sort(second);
+       for(int i=0;i<s.length();i++){
+        if(first[i]!=second[i]){
+            return false;
+        }
+       }
+       return true;
+
+
+        
+    }
+}
