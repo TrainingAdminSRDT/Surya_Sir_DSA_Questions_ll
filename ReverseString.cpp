@@ -1,15 +1,29 @@
 #include<iostream>
-#include<vector>
+// #include<vector>
 using namespace std;
-//Problem 344
+//Problem 206
+ struct ListNode {
+      int val;
+      ListNode *next;
+      ListNode() : val(0), next(nullptr) {}
+      ListNode(int x) : val(x), next(nullptr) {}
+      ListNode(int x, ListNode *next) : val(x), next(next) {}
+  };
 class Solution {
 public:
-    void reverseString(vector<char>& s) {
-        int st = 0, end = s.size()-1;
+    ListNode* reverseList(ListNode* head) {
 
-        while(st < end){
-            swap(s[st++], s[end--]);
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+
+        while(curr != nullptr){
+            ListNode* nextTemp = curr-> next;
+
+            curr ->next = prev;
+            prev = curr;
+            curr = nextTemp;
+
         }
-        
+        return prev;
     }
 };
