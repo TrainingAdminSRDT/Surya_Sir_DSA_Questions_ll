@@ -1,0 +1,16 @@
+#700. Search in a Binary Search Tree
+
+class Solution:
+    def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]: # pyright: ignore[reportUndefinedVariable]
+
+        while root:
+
+            if root.val == val:
+                return root
+
+            if val < root.val:
+                root = root.left
+            else:
+                root = root.right
+
+        return None
